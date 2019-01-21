@@ -1,0 +1,134 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link href='https://fonts.googleapis.com/css?family=Russo One' rel='stylesheet'>
+
+<style>
+body  {
+    background-image: url("https://eecspanic.weebly.com/uploads/1/2/3/4/123472752/welcome-page3-001_orig.jpeg");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+h1 {
+    color: white;
+    font-family: 'Russo One';
+    font-size: 2.4vw
+}
+h2 {
+    color: white;
+    font-family: 'Russo One';
+}
+h3 {
+    color: white;
+    font-family: 'Russo One';
+}
+p {
+    color: white;
+    font-size: 2.3vw;
+    font-family: 'Russo One';
+}
+form{
+    color: white;
+    font-size: 2vw;
+    font-family: 'Russo One';
+}
+
+button {
+  background-color: white;
+  color: black;
+  border: 2px solid #555555;
+  padding: 12px 16px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 1.3vw;
+  font-family: impact, serif;
+  margin: 4px 2px;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+button:hover {
+  color: white;
+  background-color: #6433FF;
+  -webkit-animation-name: disco; /* Safari 4.0 - 8.0 */
+  -webkit-animation-duration: 4s; /* Safari 4.0 - 8.0 */
+  animation-name: disco;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+}
+@keyframes disco {
+  0%   {background-color: #6433FF;}
+  25%  {background-color: #000FFF;}
+  50%  {background-color: #33E6FF;}
+  100% {background-color: #00FF68;}
+}
+input {
+  background-color: white;
+  color: black;
+  border: 2px solid #555555;
+  padding: 12px 16px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 1.3vw;
+  font-family: impact, serif;
+  margin: 4px 2px;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+input:hover {
+  color: white;
+  background-color: #6433FF;
+  -webkit-animation-name: yikes; /* Safari 4.0 - 8.0 */
+  -webkit-animation-duration: 4s; /* Safari 4.0 - 8.0 */
+  animation-name: yikes;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+}
+@keyframes yikes {
+  0%   {background-color: #6433FF;}
+  25%  {background-color: #000FFF;}
+  50%  {background-color: #33E6FF;}
+  100% {background-color: #00FF68;}
+}
+.row-centered {
+      text-align:center;
+  }
+</style>
+
+<div class = "container">
+  <div class = "row row-centered">
+    <h1>Would you like to clear your score?</h1>
+  </div>
+
+  <div class = "row row-centered">
+    <form action="/" method="post" id="form">
+        Username <br>
+        <input type="text" name="username"><br>
+        <input type="radio" name="choice" value="yes">Yes<br>
+        <input type="radio" name="choice" value="no">No<br>
+        <br>
+      <input type="submit" value="Submit">
+    </form>
+  </div>
+  <div class = "row row-centered">
+    <p>Current score: {{ final_score }}</p>
+    <br>
+  </div>
+</div>
+    
+{% endblock %}

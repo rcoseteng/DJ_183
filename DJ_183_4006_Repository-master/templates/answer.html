@@ -1,0 +1,233 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<link href='https://fonts.googleapis.com/css?family=Russo One' rel='stylesheet'>
+
+<head>
+  <script type="test/javascript" src="canvasjs.min.js"></script>
+  <script>
+    window.onload = function() {
+
+    var chart = new CanvasJS.Chart("chartContainer", {
+      animationEnabled: true,
+      title: {
+        text: "Who Got This Song Right?",
+        fontColor: "white",
+      },
+      backgroundColor: null,
+      data: [{
+        type: "pie",
+        indexLabelFontColor: "white",
+        startAngle: 240,
+        yValueFormatString: "##0.00\"%\"",
+        indexLabel: "{label} {y}",
+        dataPoints: [
+          {y: {{ final_song_percent }}, label: "Correct"},
+          {color: "green",
+          y: {{ wrong_percent }}, 
+          label: "Wrong"},
+        ]
+      }]
+    });
+      
+    chart.render();
+
+    }
+  </script>
+</head>
+
+
+<div class="container">
+
+	<div class="row row-centered">
+    <br><br>
+    <h1>{{ result }}</h1>
+	</div>
+
+	<div class="row row-centered">   
+		<p>The answer is <b>{{ answer }}</b></p>
+	</div>
+
+	<div class="row row-centered">
+      	<div class="col-m-4 col-centered">
+      		<script>
+    			current_url = document.URL;
+   			</script>
+
+			<form>
+				<input type="button" value="Try again?" onclick='window.location.href="{{current_url}}/question/{{ genre }}"'/>
+			</form>
+      	</div>
+      	<div class="col-m-4 col-centered">
+      		<form>
+				<input type="button" value="Change genre" onclick='window.location.href="{{current_url}}/"'/>
+			</form>
+      	</div>
+      	<div class="col-m-4 col-centered">
+      		<form>
+				<input type="button" value="Change difficulty" onclick='window.location.href="{{current_url}}/"'/>
+			</form>
+      	</div>
+	</div>
+
+	<div class = "row row-centered">
+		<p>Current score: {{ final_score }}</p>
+		<br>
+		<form action = "/confirm" method="post" id="form">
+        	<button type="submit">Submit/Clear Score</button>
+    	</form>
+	</div>
+
+	<div class = "row row-half-centered">
+    <body>
+      <div id="chartContainer" style="height: 200px; width: 30%;"></div>
+      <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    </body>
+
+		<p>Number of people that liked this song: {{ current_song_likes }} </p>
+
+	
+		<div class= "col-m-4">
+    	<form action = "/" method="post" id="form">
+			What did you think about this song? <br>
+			<input type="text" name="comment_song"><br>
+			<input type ="hidden" name="answer_song" value="{{ answer }}"><br>
+			<button type="submit">Submit comment!</button>
+    	</form>
+	
+
+	<div class = "col-m-4">
+    	<p>Recent Comment By Other Users: {{ indiv_song_comment }}</p>
+	</div>
+ </div>
+
+<a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-text="My score is {{ final_score }} in DJ183" data-lang="en"  data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<style>
+  body  {
+      background-image: url("https://eecspanic.weebly.com/uploads/1/2/3/4/123472752/answer-page-001_1_orig.jpeg");
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
+  }
+
+  h1 {
+      color: white;
+      font-size: 70px;
+      font-family: 'Russo One';
+      font-size:2.7vw;
+  }
+  h2 {
+      color: white;
+      font-family: 'Russo One';
+      font-size:2.7vw;
+  }
+  h3 {
+      color: white;
+      font-family: 'Russo One';
+  }
+  p {
+      color: white;
+      font-size:2vw;
+      font-family: 'Russo One';
+  }
+  input {
+    font-family: 'Russo One';
+    background-color: white;
+    color: black;
+    border: 2px solid #555555;
+    padding: 12px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size:1.5vw;
+    font-family: impact, serif;
+    margin: 4px 2px;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    cursor: pointer;
+  }
+
+  input:hover {
+    color: white;
+    background-color: #6433FF;
+    -webkit-animation-name: disco; /* Safari 4.0 - 8.0 */
+    -webkit-animation-duration: 4s; /* Safari 4.0 - 8.0 */
+    animation-name: disco;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+  }
+  @keyframes disco {
+    0%   {background-color: #6433FF;}
+    25%  {background-color: #000FFF;}
+    50%  {background-color: #33E6FF;}
+    100% {background-color: #00FF68;}
+  }
+
+
+  a{
+      color:white;
+      font-family: 'Russo One';
+  }
+
+
+  form {
+      color: white;
+      font-family: 'Russo One';
+  }
+  button {
+    background-color: white;
+    color: black;
+    border: 2px solid #555555;
+    padding: 12px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size:1.5vw;
+    font-family: impact, serif;
+    margin: 4px 2px;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    cursor: pointer;
+  }
+  button:hover {
+    color: white;
+    background-color: #6433FF;
+    -webkit-animation-name: disco; /* Safari 4.0 - 8.0 */
+    -webkit-animation-duration: 4s; /* Safari 4.0 - 8.0 */
+    animation-name: disco;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+  }
+  @keyframes disco {
+    0%   {background-color: #6433FF;}
+    25%  {background-color: #000FFF;}
+    50%  {background-color: #33E6FF;}
+    100% {background-color: #00FF68;}
+  }
+	.row-centered {
+	    text-align:center;
+	}
+	.col-centered {
+	    display:inline-block;
+	    float:none;
+	    text-align: center;
+	    margin-right:-4px;
+	    text-align: center;
+	}
+	.row-half-centered {
+	    text-align:left;
+	    margin-left: 125px;
+	}
+	.col-half-centered {
+	    display:inline-block;
+	    float:none;
+	    text-align: center;
+	    margin-left: 125px;
+	    text-align: center;
+	}
+</style>
+
+
+{% endblock %}

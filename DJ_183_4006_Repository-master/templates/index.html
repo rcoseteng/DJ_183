@@ -1,0 +1,302 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<link href='https://fonts.googleapis.com/css?family=Russo One' rel='stylesheet'>
+
+ <div class="container my-container">
+    <div class = "row-fluid row-centered">
+      <br><br><br><br><br><br><br>
+      <h3>Choose a genre:</h3>
+        <ul>
+           <select name="genre" form="form">
+            {% for genre in genres %}
+              <option>{{ genre }}</option> 
+            {% endfor %}
+           </select>
+         </ul>
+    </div>
+
+    <div class="container my-container">
+    <div class = "row-fluid row-centered">
+      <br>
+      <h3>Choose a difficulty:</h3>
+        <ul>
+           <select name="difficulty" form="form">
+            {% for difficulty_mode in difficulty %}
+              <option>{{ difficulty_mode }}</option> 
+            {% endfor %}
+           </select>
+         </ul>
+    </div>
+
+    <div class = "row-fluid row-centered">
+      <form action = "/q" method="post" id="form">
+        <button type="submit">Start</button>
+      </form>
+    </div>
+
+    <div class = "row-fluid row-centered">
+      <p>Current score: {{ final_score }}</p>
+    </div>
+
+    <div class = "row-fluid row-centered">
+      <form action = "/confirm" method="post" id="form">
+        <button class= "btn-block" type="submit">Submit/Clear Score</button>
+      </form>
+    </div>
+
+
+    <div class = "row-fluid row-centered">
+      <h2>DJ183 Top 5 Scores!</h2>
+
+      <table align="center">
+        <tr>
+          <th>Top Scorer</th>
+          <th>Score</th>
+        </tr>
+      {% for user in sorted_highscores: %}
+        <tr>
+        <td>{{user[0]}}</td>
+        <td>{{user[1]}}</td>
+        </tr>
+      {% endfor %}
+      </table>
+	 </div>
+
+    <div class = "row-fluid row-centered">
+      <div class="col-m-4 col-centered">
+          <div id="fb-root"></div>
+            <script>
+              (function(d, s, id) {
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) return;
+                js = d.createElement(s); js.id = id;
+                js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.2&appId=210305879891724&autoLogAppEvents=1';
+                fjs.parentNode.insertBefore(js, fjs);
+              }(document, 'script', 'facebook-jssdk'));
+            </script>
+      </div>
+    
+      <div class="col-m-4 col-centered">
+          <div class="fb-like" data-href="https://jcar-dj183.herokuapp.com/" data-layout="standard" data-action="like" data-size="large" data-show-faces="true" data-share="true"></div>
+          <div class="fb-save" data-uri="https://jcar-dj183.herokuapp.com/" data-size="large"></div>
+      </div>
+      <div class="col-m-4 col-centered">
+          <div id="fb-root"></div>
+            <script>(function(d, s, id) {
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) return;
+                js = d.createElement(s); js.id = id;
+                js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.2&appId=210305879891724&autoLogAppEvents=1';
+                fjs.parentNode.insertBefore(js, fjs);
+              }(document, 'script', 'facebook-jssdk'));
+            </script>
+
+          <div id="fb-root"></div>
+            <script>(function(d, s, id) {
+              var js, fjs = d.getElementsByTagName(s)[0];
+              if (d.getElementById(id)) return;
+                js = d.createElement(s); js.id = id;
+                js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.2&appId=210305879891724&autoLogAppEvents=1';
+                fjs.parentNode.insertBefore(js, fjs);
+              }(document, 'script', 'facebook-jssdk'));
+            </script>
+        </div>
+    </div>
+  <div class="row-fluid row-half-centered">
+        <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-text="My score is {{ final_score }} in DJ183" data-lang="en"  data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+  </div>
+  <div class = "row-fluid row-centered">
+    <script>
+      window.fbAsyncInit = function() {
+        FB.init({
+          appId            : '210305879891724',
+          autoLogAppEvents : true,
+          xfbml            : true,
+          version          : 'v3.2'
+        });
+      };
+
+      (function(d, s, id){
+         var js, fjs = d.getElementsByTagName(s)[0];
+         if (d.getElementById(id)) {return;}
+         js = d.createElement(s); js.id = id;
+         js.src = "https://connect.facebook.net/en_US/sdk.js";
+         fjs.parentNode.insertBefore(js, fjs);
+       }(document, 'script', 'facebook-jssdk'));
+    </script>
+  </div>
+</div>
+    
+<style>
+body  {
+    background-image: url("https://eecspanic.weebly.com/uploads/1/2/3/4/123472752/welcome-page-001_orig.jpeg");
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+a {
+
+}
+
+select{
+	background-color: #4CAF50;
+	color: white;
+	padding: 16px;
+	font-size:1.2vw;
+	border: none;
+	cursor: pointer;
+}
+select:hover {
+  color: white;
+  background-color: #6433FF;
+  -webkit-animation-name: disco; /* Safari 4.0 - 8.0 */
+  -webkit-animation-duration: 4s; /* Safari 4.0 - 8.0 */
+  animation-name: disco;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+
+}
+@keyframes disco {
+  0%   {background-color: #6433FF;}
+  25%  {background-color: #000FFF;}
+  50%  {background-color: #33E6FF;}
+  100% {background-color: #00FF68;}
+}
+
+
+
+h1 {
+    color: white;
+}
+h2 {
+    color: white;
+    font-family: 'Russo One';
+	  animation-name: transformatino;
+  	animation-duration: 8s;
+  	animation-iteration-count: infinite;
+    font-size:2.3vw;
+}
+@keyframes transformatino {
+  0% {transform: rotateX(0deg);}
+  100% {transform: rotateX(360deg);}
+}
+
+h3 {
+    color: white;
+    font-family: 'Russo One';
+    font-size:2.5vw;
+
+}
+p {
+    color: white;
+    font-size:1.6vw;
+    font-weight: bold;
+    font-family: 'Russo One';
+
+}
+
+input {
+    color: black;
+}
+button {
+  background-color: white;
+  color: black;
+  border: 2px solid #555555;
+  padding: 12px 16px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size:1.3vw;
+  font-family: impact, serif;
+  margin: 4px 2px;
+  -webkit-transition-duration: 0.4s;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+button:hover {
+  color: white;
+  background-color: #6433FF;
+  -webkit-animation-name: disco;
+  -webkit-animation-duration: 4s;
+  animation-name: disco;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+}
+@keyframes disco {
+  0%   {background-color: #6433FF;}
+  25%  {background-color: #000FFF;}
+  50%  {background-color: #33E6FF;}
+  100% {background-color: #00FF68;}
+}
+form {
+    color: white;
+}
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 50%;
+    opacity: 0.8;
+    filter: alpha(opacity=80);
+    color: black;
+}
+
+td, th {
+    border: 5px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+    background-color: white;
+    font-family: 'Russo One';
+
+  	border-color: #6433FF;
+  	-webkit-animation-name: bordercolor;
+  	-webkit-animation-duration: 4s;
+  	animation-name: bordercolor;
+  	animation-duration: 8s;
+  	animation-iteration-count: infinite;
+}
+@keyframes bordercolor {
+  0%   {background-color: #E68BFF;}
+  25%  {background-color: #C7DBF4;}
+  50%  {background-color: #33E6FF;}
+  100% {background-color: #00FF68;}
+  0%   {border-color: white;}
+  25%  {border-color: black;}
+  50%  {border-color: white;}
+  100% {border-color: black;}
+}
+
+tr:nth-child(even) {
+    background-color: white;
+}
+
+.row-centered {
+    text-align:center;
+}
+.col-centered {
+    display:inline-block;
+    float:none;
+    text-align: center;
+    margin-right:-4px;
+    text-align: center;
+}
+.row-half-centered {
+	    text-align:left;
+	    margin-left: 29%;
+}
+.col-half-centered {
+	display:inline-block;
+    float:none;
+    text-align: center;
+    margin-left: 125px;
+    text-align: center;
+}
+</style>
+</head>
+<body>
+
+
+
+{% endblock %}
+
